@@ -44,75 +44,87 @@ FUTURES permet aux professionnels de la stratégie, de la prospective et de l’
 
 Les objectifs du MVP de FUTURES sont définis à partir des critères de réussite des trois personas : Claire, Thomas et Julien.
 
-Ils visent à vérifier la capacité des utilisateurs à accomplir les actions essentielles du produit dans un délai de six semaines de développement.
+Ils visent à vérifier la capacité des utilisateurs à accomplir les actions essentielles du produit à l'issue des six semaines de développement.
 
-**Objectif 1 - Faciliter l'exploration des futurs (Thomas)**
+#### Objectif 1 — Faciliter l'exploration des futurs (Thomas)
 
-**Permettre à au moins 4 collaborateurs sur 5, non spécialistes de la prospective, d'explorer un scénario de rupture, de consulter au moins deux artefacts et de consigner une réflexion personnelle dans leur carnet d'étonnement, en moins de 15 minutes et sans assistance, lors des tests réalisés à l'issue des six semaines.**
+Permettre à au moins **4 collaborateurs sur 5**, non spécialistes de la prospective, d'explorer un scénario de rupture, de consulter au moins deux artefacts et de consigner une réflexion personnelle dans leur carnet d'étonnement, **en moins de 15 minutes et sans assistance**, lors des tests réalisés à l'issue des six semaines.
 
 **Résultat attendu :** les collaborateurs parviennent à explorer un futur et à exprimer un questionnement sans accompagnement préalable.
 
 **Indicateurs de réussite :**
-
 - Au moins 80 % des participants terminent le parcours.
 - Durée du parcours inférieure ou égale à 15 minutes.
 - Aucune assistance nécessaire pour accomplir les actions demandées.
 
-**Objectif 2 - Rendre les scénarios accessibles et crédibles (Claire)**
+**Fonctionnalités du PRD associées :** F01, F02.1, F03 et F04.
 
-**Permettre à un professionnel de la stratégie ou de la prospective de consulter un scénario publié, de retrouver au moins trois signaux documentés avec leurs sources et de vérifier les contenus associés, en moins de 10 minutes, sur la version livrée à l'issue des six semaines.**
+#### Objectif 2 — Rendre les scénarios accessibles et crédibles (Claire)
 
-**Résultat attendu :** les professionnels de la prospective disposent d'un scénario structuré, dont les fondements documentaires peuvent être consultés facilement.
+Permettre à un professionnel de la stratégie ou de la prospective de consulter le scénario fondateur d'un futur et d'identifier **au moins trois signaux réels documentés, accompagnés de leurs sources, directement dans l'onglet Scénario**, en moins de 10 minutes, sur la version livrée à l'issue des six semaines.
+
+**Résultat attendu :** les professionnels de la prospective peuvent consulter un scénario structuré et vérifier ses principaux fondements documentaires, sans avoir besoin d'une chronologie prospective dédiée.
 
 **Indicateurs de réussite :**
-
-- Consultation du scénario complet.
-- Identification d'au moins trois signaux documentés.
-- Accès aux sources correspondantes.
+- Consultation du scénario fondateur.
+- Identification d'au moins trois signaux réels documentés.
+- Accès aux sources correspondant à chacun des trois signaux.
 - Parcours effectué en 10 minutes maximum.
 
-**Objectif 3 - Garantir une administration simple et sécurisée (Julien)**
+**Fonctionnalité du PRD associée :** F02.1 — Consulter le scénario fondateur.
 
-**Permettre à un administrateur de créer un compte utilisateur, de lui attribuer un rôle et de désactiver son accès en moins de 5 minutes, tout en vérifiant qu'un utilisateur standard ne peut pas accéder aux fonctions d'administration, sur la version livrée à l'issue des six semaines.**
+#### Objectif 3 — Garantir un accès sécurisé à la plateforme (Julien)
 
-**Résultat attendu :** les opérations courantes d'administration sont réalisables rapidement, avec un contrôle effectif des droits d'accès.
+Permettre, à l'issue des six semaines, de vérifier que **100 % des scénarios de contrôle d'accès définis pour le MVP** sont réussis : un utilisateur actif et autorisé peut se connecter et consulter le futur disponible, tandis qu'un utilisateur non authentifié ou ne disposant pas des habilitations nécessaires se voit refuser l'accès aux contenus et fonctions protégés.
+
+**Résultat attendu :** l'authentification et les autorisations fonctionnent conformément aux rôles et aux règles de sécurité définis, sans nécessiter une interface dédiée d'administration des comptes.
 
 **Indicateurs de réussite :**
+- Connexion réussie pour un utilisateur actif disposant des autorisations nécessaires.
+- Accès au futur autorisé après authentification.
+- Refus d'accès aux contenus protégés pour un utilisateur non authentifié.
+- Refus d'accès aux contenus ou fonctions non autorisés, y compris par accès direct à leur URL.
+- Réussite de l'ensemble des scénarios de contrôle d'accès documentés pour le MVP.
 
-- Création, attribution de rôle et désactivation réalisées en 5 minutes maximum.
-- Droits d'accès correctement appliqués.
-- Accès administratif refusé aux utilisateurs non autorisés.
+**Fonctionnalité du PRD associée :** F01 — Authentification et accès à un futur.
 
   <br>
 
-## 5. Périmètre
+### 5. Périmètre
 
-Le MVP de FUTURES vise à proposer une première expérience fonctionnelle d'exploration prospective, permettant à un collaborateur de découvrir un futur de rupture, d'en comprendre la trajectoire, d'explorer des contenus fictionnels et de consigner ses réflexions personnelles.
+Le MVP de FUTURES vise à proposer une première expérience fonctionnelle d'exploration prospective, permettant à un collaborateur de découvrir un scénario de rupture, d'explorer des contenus fictionnels, de consigner ses réflexions personnelles et d'approfondir ses questionnements grâce à un agent conversationnel IA.
 
 Cette première version est volontairement limitée à **un seul futur**, afin de concentrer les six semaines de développement sur la qualité de l'expérience, la cohérence des contenus et la fiabilité des fonctionnalités essentielles.
 
-**5.1. Fonctionnalités incluses dans le MVP**
+**5.1. Fonctionnalités incluses dans le MVP** 
 
 | Bloc fonctionnel | Périmètre retenu |
 | --- | --- |
-| **Authentification et accès** | Connexion des utilisateurs et gestion des accès selon les rôles définis. |
-| **Accueil et sélection du futur** | Page d'accueil présentant le premier futur disponible et donnant accès à son exploration. |
-| **Exploration du scénario** | Consultation d'un scénario fondateur présentant le contexte, les ruptures et les caractéristiques du monde futur. |
-| **Trajectoire prospective** | Visualisation d'une chronologie comprenant des signaux réels documentés et des événements fictionnels. |
-| **Artefacts immersifs** | Consultation de cinq artefacts fictionnels au maximum, répartis entre articles, témoignages écrits et podcast. |
-| **Carnet d'étonnement** | Création, consultation, modification et suppression de notes personnelles associées au futur exploré. |
-| **Administration minimale** | Gestion des utilisateurs, des rôles et des principaux contenus du futur. |
-| **Gestion des contenus** | Ajout, modification et publication des scénarios, signaux, événements et artefacts. |
+| **Authentification et accès (F01)** | Connexion des utilisateurs via Supabase Auth, reconnaissance des rôles et contrôle des autorisations d'accès aux contenus et fonctions protégés. |
+| **Accueil et sélection du futur (F01)** | Page d'accueil présentant le premier futur disponible et donnant accès à son exploration. |
+| **Exploration du scénario (F02.1)** | Consultation du scénario fondateur présentant le contexte, les ruptures et les caractéristiques du monde futur. Présentation d'au moins trois signaux réels documentés, accompagnés de leurs sources, directement dans l'onglet Scénario. |
+| **Artefacts immersifs (F03)** | Consultation de cinq artefacts fictionnels préparés en amont, répartis entre articles, témoignages écrits et podcast. |
+| **Carnet d'étonnement (F04)** | Création, consultation, modification et suppression de notes personnelles associées au futur exploré. Possibilité de consigner des réflexions libres, sans rattachement obligatoire à un contenu particulier. |
+| **Agent conversationnel IA (F05)** | Intégration d'un agent via l'API OpenAI permettant d'interroger le scénario et les contenus publiés du premier futur. Contextualisation limitée aux informations autorisées et au corpus disponible. |
+| **Gestion minimale des comptes et des rôles** | Préparation et gestion des comptes directement dans Supabase, sans développement d'une interface dédiée. Vérification des autorisations selon les rôles définis. |
+| **Gestion des contenus** | Préparation, validation et enregistrement des contenus du premier futur dans Supabase. Aucune interface complète de création ou de publication éditoriale n'est exigée pour le MVP. |
+| **Actualisation en temps réel** | Intégration ciblée de Supabase Realtime sur un cas d'usage simple, afin de satisfaire les exigences techniques du projet sans développer de fonctionnalités collaboratives avancées. |
 
-**5.2. Fonctionnalité optionnelle - Si le temps le permet**
+  <br>
+
+**5.2. Fonctionnalité optionnelle — Si le temps le permet**
 
 | Bloc fonctionnel | Périmètre envisagé |
 | --- | --- |
-| **Agent conversationnel IA** | Intégration d'un agent permettant d'interroger le premier scénario et ses contenus publiés, avec une contextualisation limitée au corpus disponible. |
+| **Trajectoire prospective (F02.2)** | Visualisation d'une chronologie présentant les signaux réels documentés et les événements fictionnels qui conduisent au futur exploré. Les éléments réels et fictionnels sont clairement différenciés. |
 
-L'agent conversationnel représente une valeur potentielle importante pour FUTURES, mais nécessite une intégration technique supplémentaire : connexion à l'API OpenAI, gestion du contexte, fiabilité des réponses et sécurisation des échanges.
+La trajectoire prospective constitue un enrichissement de l'expérience immersive, mais n'est pas indispensable à la première démonstration de valeur de FUTURES.
 
-Son développement sera envisagé uniquement après stabilisation des fonctionnalités prioritaires.
+Sa réalisation implique un travail supplémentaire de recherche documentaire, de construction narrative, de conception d'interface et de développement.
+
+Elle sera développée uniquement si les fonctionnalités obligatoires du MVP sont terminées, testées et stabilisées. Dans le cas contraire, elle sera reportée à une version ultérieure.
+
+  <br>
 
 **5.3. Fonctionnalités exclues du MVP**
 
@@ -122,22 +134,29 @@ Son développement sera envisagé uniquement après stabilisation des fonctionna
 | **Campagnes prospectives** | Création de campagnes avec une question centrale, des participants et un ou plusieurs futurs associés. |
 | **Synthèses collectives** | Analyse des notes d'étonnement associées aux campagnes, identification des thèmes récurrents et des divergences. |
 | **Studio de création avancé** | Création guidée de futurs et génération assistée de scénarios et d'artefacts. |
-| **Génération multimédia automatisée** | Intégration complète des services IA permettant de produire des articles, illustrations et podcasts depuis le back-office. |
+| **Génération multimédia automatisée** | Intégration des services IA permettant de produire automatiquement articles, illustrations et podcasts depuis l'application. |
+| **Administration des utilisateurs avancée** | Interface dédiée à la création et à la désactivation des comptes, à l'attribution des rôles et à la gestion des habilitations. |
+| **Gestion éditoriale avancée** | Interface permettant de créer, modifier, valider et publier les scénarios, les signaux, les événements et les artefacts. |
 | **Gestion multi-organisation avancée** | Administration de plusieurs organisations et de leurs contenus contextualisés. |
 | **Administration et suivi avancés** | Tableaux de bord, indicateurs d'utilisation, supervision détaillée des générations et des coûts IA. |
 | **Exports et restitutions** | Export des synthèses et résultats des campagnes, notamment au format PDF. |
 | **Intégrations d'entreprise** | Authentification SSO, connexions aux systèmes internes et traitement de documents stratégiques sensibles. |
+  <br>
 
-### 5.4. Principes de limitation du périmètre
+**5.4. Principes de limitation du périmètre** 
 
 Pour garantir une livraison cohérente dans le délai prévu :
 
 - Un seul futur sera disponible.
-- Les interfaces seront limitées aux parcours essentiels d'exploration et d'administration.
-- Les fonctionnalités de collaboration avancée seront reportées.
-- Les développements techniques seront priorisés selon leur contribution directe aux objectifs SMART.
+- L'Explorer comprendra trois onglets obligatoires : Scénario, Artefacts et Carnet d'étonnement.
+- Les trois signaux réels documentés seront accessibles depuis l'onglet Scénario, sans nécessiter une chronologie dédiée.
+- L'agent conversationnel IA sera intégré à l'Explorer, avec un périmètre limité au premier futur et à ses contenus validés.
+- Les cinq artefacts seront préparés en amont et stockés dans l'application, sans génération automatique à chaque consultation.
+- La gestion des utilisateurs, des rôles et des contenus s'appuiera principalement sur les outils d'administration de Supabase, sans développement d'un back-office complet.
+- Les fonctionnalités de collaboration avancée et de restitution collective seront reportées.
+- Les développements techniques seront priorisés selon leur contribution aux objectifs SMART et aux exigences obligatoires de la Checklist Qualité Produit.
 
-**Le MVP doit avant tout démontrer la capacité de FUTURES à rendre un scénario prospectif concret, accessible et explorable, tout en permettant aux utilisateurs de formaliser leurs étonnements.**
+**Le MVP doit avant tout démontrer la capacité de FUTURES à rendre un scénario prospectif concret, accessible et explorable, tout en permettant aux utilisateurs de formaliser leurs étonnements et d'approfondir leurs questionnements grâce à l'intelligence artificielle.**
 
 <br>
 
@@ -163,7 +182,7 @@ Les évaluations sont établies pour le contexte de FUTURES : une première appl
 
 <br>
 
-## 7. Matrice des risques
+### 7. Matrice des risques
 
 La réalisation du MVP de FUTURES repose sur plusieurs outils de développement assisté par IA, des services externes et une architecture intégrant notamment Supabase, Lovable et l'API OpenAI.
 
@@ -194,7 +213,7 @@ Les probabilités et impacts présentés constituent des estimations initiales. 
 
 <br>
 
-## 8. Planning et jalons
+### 8. Planning et jalons
 
 Le développement du MVP de FUTURES s'inscrit dans un programme de six semaines, organisé autour des modules du bootcamp Vibe Coding de Lion.
 
@@ -218,7 +237,7 @@ Chaque semaine est associée à des livrables vérifiables, permettant de suivre
 
 Trois jalons principaux permettront de vérifier la progression du développement.
 
-### Jalon 1 - Fondations fonctionnelles et techniques (fin de semaine 3)
+**Jalon 1 - Fondations fonctionnelles et techniques (fin de semaine 3)**
 
 **Objectif :** disposer d'une première application navigable, connectée à une base de données sécurisée.
 
@@ -231,7 +250,7 @@ Livrables attendus :
 - Authentification et premières politiques RLS opérationnelles.
 - Premiers écrans connectés aux données.
 
-### Jalon 2 - Expérience immersive et intelligence artificielle (fin de semaine 4)
+**Jalon 2 - Expérience immersive et intelligence artificielle (fin de semaine 4)**
 
 **Objectif :** rendre opérationnels les principaux parcours d'exploration et l'interaction avec l'agent IA.
 
@@ -243,7 +262,7 @@ Livrables attendus :
 - Agent conversationnel connecté à l'API OpenAI.
 - Workflow Claude Cowork de veille prospective fonctionnel et documenté.
 
-### Jalon 3 - MVP déployé et vérifié (fin de semaine 6)
+**Jalon 3 - MVP déployé et vérifié (fin de semaine 6)**
 
 **Objectif :** disposer d'une application stable, accessible en ligne et accompagnée des livrables nécessaires à son évaluation.
 
