@@ -1,120 +1,222 @@
 # PRD : SPECIFICATIONS DES 5 FONCTIONNALITES PRINCIPALES DU MVP FUTURES
-### F01 - AUTHENTIFICATION ET ACCES A UN FUTUR
+### F01 — AUTHENTIFICATION ET ACCÈS À UN FUTUR
 
 **1. Ce que l'utilisateur fait**
-- L'utilisateur se connecte à FUTURES avec ses identifiants personnels.
-- Après authentification, il accède à la page d'accueil et visualise les futurs auxquels il est autorisé à accéder.
-- Dans le cadre du MVP, un seul futur est disponible. L'utilisateur peut le sélectionner pour entrer dans l'espace Explorer.
 
-**3. Écrans concernés**
+L'utilisateur se connecte à FUTURES à l'aide de son adresse e-mail et de son mot de passe.
+
+Une fois authentifié, il accède à la page d'accueil et peut sélectionner le futur disponible pour commencer son exploration.
+
+Les contenus et fonctionnalités accessibles dépendent de ses autorisations.
+
+**2. Écrans concernés**
+
 - Page de connexion.
 - Page d'accueil présentant le futur disponible.
 - Interface Explorer après sélection du futur.
 
-**5. Données mobilisées**
-- Utilisateur	: Identifier l'utilisateur connecté, son statut et son organisation de rattachement.
-- Organisation :	Identifier l'organisation de l'utilisateur et son périmètre d'accès.
-- Rôle	: Déterminer les rôles existants : Collaborateur, Responsable habilité, Administrateur d'organisation et Super Administrateur.
-- Attribution de rôle :	Identifier le ou les rôles attribués à l'utilisateur.
-- Permission :	Déterminer les actions autorisées en fonction des rôles attribués.
-- Futur :	Récupérer les informations du futur à afficher : titre, description, illustration et statut de publication.
+**3. Données mobilisées**
 
-Relations techniques à prévoir :
-- Utilisateur est relié à Organisation par un identifiant d'organisation.
-- Attribution de rôle relie un utilisateur à un rôle.
-- Les rôles sont reliés aux permissions via une association rôle–permission.
-- L'accès d'une organisation à un futur repose sur la relation Organisation–Futur définie dans le MCD cible. Cette relation plusieurs-à-plusieurs nécessitera une table d'association lors de sa traduction dans Supabase.
+| Entité | Utilisation |
+|---|---|
+| **Utilisateur** | Identifier l'utilisateur connecté, son statut et son organisation. |
+| **Organisation** | Identifier l'organisation à laquelle appartient l'utilisateur. |
+| **Rôle** | Définir les différents rôles existants dans FUTURES. |
+| **Attribution de rôle** | Identifier les rôles attribués à l'utilisateur. |
+| **Permission** | Déterminer les actions autorisées selon les rôles. |
+| **Futur** | Récupérer le titre, la description, l'illustration et le statut du futur disponible. |
 
-Précision : Supabase Auth assure l'authentification technique. L'entité Utilisateur conserve les informations métier du compte et référence l'identité authentifiée. Il n'est pas nécessaire de créer une seconde gestion des mots de passe.
+**Précisions techniques :**
 
-**7. Règles métier**
-- L'utilisateur doit être authentifié pour accéder aux espaces protégés de FUTURES.
+- L'authentification est assurée par Supabase Auth.
+- Les autorisations d'accès sont contrôlées à partir des données utilisateur, des rôles et des règles de sécurité définies dans Supabase.
+- Les comptes et les rôles sont configurés directement dans Supabase pour le MVP. Aucune interface dédiée à leur administration n'est prévue.
+
+**Relations entre les données :**
+- Une organisation peut regrouper plusieurs utilisateurs.
 - Chaque utilisateur standard appartient à une seule organisation.
-- Un utilisateur disposant du rôle global Super Administrateur peut ne pas être rattaché à une organisation.
-- Les rôles sont attribués aux utilisateurs via l'entité Attribution de rôle.
-- Les droits d'accès sont déterminés par les rôles, les permissions et le périmètre organisationnel.
+- Un utilisateur peut posséder plusieurs attributions de rôle.
+- Chaque attribution de rôle associe un utilisateur à un rôle.
+- Un rôle peut être attribué à plusieurs utilisateurs.
+- Un rôle peut posséder plusieurs permissions.
+- Une permission peut être associée à plusieurs rôles.
+- Une organisation peut avoir accès à plusieurs futurs.
+- Un futur peut être accessible à plusieurs organisations.
+Précision : les relations plusieurs-à-plusieurs entre Rôle et Permission, ainsi qu'entre Organisation et Futur, nécessitent des tables d'association dans Supabase.
+
+**4. Règles métier**
+
+- L'utilisateur doit être authentifié pour consulter les contenus protégés.
+- Seuls les comptes actifs peuvent accéder à FUTURES.
+- Chaque utilisateur standard appartient à une organisation.
+- Les autorisations dépendent du rôle attribué et du périmètre d'accès de l'utilisateur.
 - Seuls les futurs publiés et autorisés sont accessibles aux collaborateurs.
-- Un utilisateur ne peut pas modifier ses propres habilitations.
-- Les contrôles d'accès doivent être appliqués côté serveur et dans Supabase, et pas uniquement dans les interfaces.
+- Un utilisateur ne peut pas accéder aux contenus ou fonctions pour lesquels il ne dispose pas des autorisations nécessaires.
+- Les contrôles d'accès sont appliqués côté serveur et dans Supabase, notamment à travers les politiques RLS.
+- La création, la désactivation des comptes et l'attribution des rôles sont réalisées directement dans Supabase durant le MVP.
 
-**9. Priorité**
-Critique — MVP obligatoire.
+**5. Priorité**
 
-**11. Critères d'acceptation**
-- Un utilisateur possédant un compte actif peut se connecter avec ses identifiants.
+**Critique — MVP obligatoire.**
+
+**6. Critères d'acceptation**
+
+- Un utilisateur disposant d'un compte actif et autorisé peut se connecter avec ses identifiants.
 - Après connexion, il accède à la page d'accueil.
-- Il visualise le futur publié auquel son organisation a accès.
-- Il peut sélectionner ce futur et accéder à l'Explorer.
-- Un utilisateur non authentifié ne peut pas consulter les contenus protégés.
-- Un utilisateur non autorisé ne peut pas accéder à un futur, même en utilisant directement son URL.
-- Les rôles attribués sont correctement pris en compte dans les autorisations.
+- Il visualise le futur publié auquel il est autorisé à accéder.
+- Il peut sélectionner ce futur et ouvrir l'Explorer.
+- Un utilisateur non authentifié ne peut pas accéder aux contenus protégés.
+- Un utilisateur sans les habilitations nécessaires ne peut pas accéder aux contenus ou fonctions non autorisés, y compris en utilisant directement leur URL.
+- Les autorisations appliquées correspondent au rôle de l'utilisateur.
+- Un compte désactivé ne peut plus accéder à l'application.
+
+**Objectif SMART associé :** Objectif 3 — Garantir un accès sécurisé à la plateforme (Julien).
 
 <br>
 
 
-### F02.1 - Consulter le scénario fondateur
 
-**Priorité : Critique — MVP obligatoire**
+### F02.1 — CONSULTER LE SCÉNARIO FONDATEUR
 
-**Ce que l'utilisateur fait :** 
-- l'utilisateur accède à l'onglet Scénario depuis l'Explorer et découvre le récit fondateur du futur, son contexte et ses principales hypothèses.
+**1. Ce que l'utilisateur fait**
 
-**Écran concerné :**
+Depuis l'Explorer, l'utilisateur accède à l'onglet Scénario pour découvrir le récit fondateur du futur sélectionné.
+
+Il prend connaissance du contexte, des principales ruptures envisagées et des caractéristiques du monde fictionnel.
+
+Il peut également consulter au moins trois signaux réels documentés ayant inspiré la construction de ce futur, ainsi que leurs sources.
+
+L'objectif est de permettre à l'utilisateur de comprendre le futur proposé et ses fondements, sans nécessiter une chronologie prospective détaillée.
+
+**2. Écrans concernés**
+
 - Explorer — Onglet Scénario.
 
-**Données mobilisées :**
+**3. Données mobilisées**
 
-- **Futur :** scénario fondateur, titre, description et statut de publication.
+| Entité | Utilisation |
+|---|---|
+| **Futur** | Récupérer le titre, le récit fondateur, les informations de présentation et le statut de publication du futur. |
+| **Signal prospectif** | Récupérer les signaux réels associés au futur, leur description, leur date et leurs références documentaires. |
 
-**Règles métier :**
+**Précisions techniques :**
 
-- Chaque scénario est associé à un futur.
-- Seuls les futurs publiés et autorisés sont accessibles aux collaborateurs.
-- Le scénario fondateur est consultable sans génération IA à chaque ouverture.
-- Le contenu est préparé et validé avant publication.
+- Le scénario fondateur est enregistré dans l'entité Futur. Aucune table Scénario supplémentaire n'est nécessaire.
+- Chaque signal prospectif est associé au futur concerné.
+- Les signaux sont présentés directement dans l'onglet Scénario, sans développement d'une chronologie.
 
-**Critères d'acceptation :**
+**Relation entre les données :**
+- Un futur peut posséder plusieurs signaux prospectifs.
+- Chaque signal prospectif appartient à un seul futur.
+- Le scénario fondateur est directement associé à l'entité Futur : aucune entité Scénario distincte n'est nécessaire.
+- Précision : dans le MVP, au moins trois signaux prospectifs documentés seront associés au futur publié et présentés directement dans l'onglet Scénario. Cette exigence relève du contenu à livrer, et non d'une cardinalité imposée à tous les futurs.
 
-- L'utilisateur peut ouvrir l'onglet Scénario.
-- Le récit fondateur du futur est entièrement consultable.
-- Le scénario affiché correspond au futur sélectionné.
-- Le contenu reste accessible après actualisation de la page.
-- Un scénario non publié n'est pas accessible aux collaborateurs.
+**4. Règles métier**
+
+- Seuls les utilisateurs autorisés peuvent consulter le scénario d'un futur publié.
+- Le scénario fondateur est préparé et validé avant sa publication.
+- Le contenu du scénario est stocké et consultable sans génération IA à chaque ouverture.
+- Chaque signal prospectif est associé à un futur.
+- Chaque signal présenté doit disposer d'une source identifiable et consultable.
+- Les signaux correspondent à des informations réelles et documentées. Ils doivent être clairement distingués du récit fictionnel.
+- Le premier futur du MVP doit présenter au moins trois signaux documentés.
+- La présentation chronologique des signaux et des événements fictionnels relève de F02.2, fonctionnalité optionnelle.
+
+**5. Priorité**
+
+**Critique — MVP obligatoire.**
+
+**6. Critères d'acceptation**
+
+- L'utilisateur peut accéder à l'onglet Scénario depuis l'Explorer.
+- Il peut consulter l'intégralité du récit fondateur du futur sélectionné.
+- Au moins trois signaux réels documentés sont visibles dans cet onglet.
+- Chaque signal présente une description et une référence documentaire identifiable.
+- L'utilisateur peut accéder aux sources associées aux trois signaux.
+- Le récit fictionnel et les signaux réels sont clairement différenciés.
+- Le contenu reste accessible après actualisation de la page, pour un utilisateur autorisé.
+- Un utilisateur non autorisé ne peut pas consulter le scénario.
+- Un professionnel de la stratégie ou de la prospective peut consulter le scénario et identifier les trois signaux sourcés en 10 minutes maximum lors d'un test.
+
+**Objectif SMART associé :** Objectif 2 — Rendre les scénarios accessibles et crédibles (Claire).
+
+**Objectif SMART également couvert :** Objectif 1 — Faciliter l'exploration des futurs (Thomas).
 
   <br>
 
-### F02.2 - Explorer la trajectoire du futur
+### F02.2 — EXPLORER LA TRAJECTOIRE DU FUTUR
 
-**Priorité : Optionnelle — Si le temps le permet / évolution post-MVP**
+**1. Ce que l'utilisateur fait**
 
-**Ce que l'utilisateur fait :**
-- l'utilisateur parcourt une chronologie présentant les signaux réels et documentés ainsi que les événements fictionnels ayant conduit au futur exploré.
+Depuis l'Explorer, l'utilisateur accède à l'onglet Trajectoire pour comprendre comment le monde actuel pourrait progressivement évoluer vers le futur imaginé.
 
-**Écran concerné :** 
+Il parcourt une chronologie composée de deux types d'éléments :
+
+- Des signaux prospectifs réels et documentés, permettant d'identifier les transformations déjà observables.
+- Des événements fictionnels, représentant les ruptures et évolutions imaginées dans le scénario.
+
+Cette représentation permet à l'utilisateur de comprendre les étapes possibles du basculement entre le présent et le futur exploré.
+
+**2. Écrans concernés**
+
 - Explorer — Onglet Trajectoire du futur.
 
-**Données mobilisées :**
+**3. Données mobilisées**
 
-- **Futur :** identification du futur concerné.
-- **Signal prospectif :** signaux réels et sources documentaires.
-- **Événement fictionnel :** événements imaginés de la trajectoire.
+| Entité | Utilisation |
+|---|---|
+| **Futur** | Identifier le futur auquel appartient la trajectoire. |
+| **Signal prospectif** | Récupérer les signaux réels documentés, leurs dates et leurs sources. |
+| **Événement fictionnel** | Récupérer les événements imaginés, leurs descriptions et leurs dates dans la chronologie. |
 
-**Règles métier :**
+**Précisions techniques :**
 
-- Chaque signal et chaque événement fictionnel appartient à un futur.
-- Les signaux réels doivent être associés à des sources vérifiables.
-- Les éléments réels et fictionnels doivent être clairement différenciés.
-- Les événements doivent respecter une chronologie cohérente.
+- Chaque signal prospectif et chaque événement fictionnel est associé à un futur.
+- Les signaux documentés peuvent être réutilisés entre l'onglet Scénario et la trajectoire, sans duplication de données.
+- La trajectoire peut être construite à partir des dates et informations des signaux et événements, sans nécessiter une table Trajectoire supplémentaire.
 
-**Critères d'acceptation :**
+**Relation entre les données**
+- Un futur peut posséder plusieurs signaux prospectifs.
+- Chaque signal prospectif appartient à un seul futur.
+- Un futur peut posséder plusieurs événements fictionnels.
+- Chaque événement fictionnel appartient à un seul futur.
 
-- L'utilisateur peut consulter la chronologie du futur.
-- Les signaux réels et les événements fictionnels sont distingués visuellement.
-- Les sources des signaux documentés sont accessibles.
-- Les événements sont affichés dans l'ordre chronologique.
-- La navigation entre la trajectoire et les autres contenus conserve le futur sélectionné.
+Précision : les signaux prospectifs sont les mêmes données que celles mobilisées dans F02.1. Leur réutilisation dans la trajectoire ne nécessite pas de duplication ni de table Trajectoire supplémentaire.
+L'entité Événement fictionnel et son exploitation dans une chronologie ne sont nécessaires que si la fonctionnalité optionnelle F02.2 est développée.
 
-**Condition de réalisation :** cette fonctionnalité ne sera développée que si les parcours obligatoires du MVP sont terminés, testés et stabilisés. À défaut, elle sera reportée dans une version ultérieure de FUTURES.
+**4. Règles métier**
+
+- Seuls les utilisateurs autorisés peuvent consulter la trajectoire d'un futur publié.
+- Chaque signal prospectif et chaque événement fictionnel doit être associé à un futur.
+- Les signaux prospectifs correspondent à des informations réelles et disposent de sources documentaires.
+- Les événements fictionnels correspondent à des évolutions imaginées et ne doivent pas être présentés comme des faits.
+- Les deux catégories d'éléments doivent être visuellement différenciées.
+- Les éléments doivent être affichés dans un ordre chronologique cohérent.
+- L'onglet Trajectoire n'est visible que si la fonctionnalité est effectivement développée et disponible.
+
+**5. Priorité**
+
+**Optionnelle — Si le temps le permet / Post-MVP.**
+
+Cette fonctionnalité ne fait pas partie du périmètre obligatoire des six semaines.
+
+Elle ne sera développée que si les fonctionnalités prioritaires sont terminées, testées et stabilisées.
+
+Son absence ne doit pas empêcher le fonctionnement de l'Explorer ou la validation des objectifs SMART du MVP.
+
+**6. Critères d'acceptation**
+
+*Applicables uniquement si la fonctionnalité est développée.*
+
+- L'utilisateur peut accéder à l'onglet Trajectoire depuis l'Explorer.
+- Il peut parcourir les événements et signaux selon leur ordre chronologique.
+- Les signaux réels et les événements fictionnels sont clairement différenciés.
+- Chaque signal documenté dispose d'une source identifiable et consultable.
+- Les éléments affichés correspondent au futur sélectionné.
+- L'utilisateur peut revenir aux autres onglets sans perdre le futur en cours.
+- Si la fonctionnalité n'est pas développée, aucun onglet Trajectoire inactif ou incomplet n'est affiché.
+
+**Objectif SMART associé :** aucun objectif SMART obligatoire du MVP ne dépend de cette fonctionnalité.
 
 <br>
 
