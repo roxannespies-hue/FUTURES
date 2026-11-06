@@ -240,7 +240,7 @@ Son absence ne doit pas empêcher le fonctionnement de l'Explorer ou la validati
 - Template d'artefact	: Identifier la structure attendue selon le format : article, témoignage ou podcast.
 - Média :	Récupérer les illustrations, images principales ou fichiers audio associés aux artefacts.
 
-Relations entre les données :
+**Relations entre les données :**
 - Un futur peut contenir plusieurs artefacts.
 - Chaque artefact appartient à un seul futur.
 - Chaque artefact utilise un template.
